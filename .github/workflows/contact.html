@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Book Your Divine Experience | Divine Experience Design & Decor</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Brand Styles -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+    body { font-family: 'Montserrat', sans-serif; }
+    .heading-font { font-family: 'Playfair Display', serif; }
+  </style>
+
+</head>
+
+<body class="bg-[#E5D4F5] text-[#2D0F3B]">
+
+  <!-- NAVBAR -->
+  <nav class="w-full py-6 px-6 shadow-sm bg-black fixed top-0 left-0 z-50 text-white">
+    <div class="max-w-7xl mx-auto flex justify-between items-center">
+      <h1 class="heading-font text-2xl font-bold tracking-wide">
+        Divine Experience Design & Decor
+      </h1>
+
+      <div class="hidden md:flex space-x-6">
+        <a href="index.html" class="hover:text-[#E2B63F] transition">Home</a>
+        <a href="services.html" class="hover:text-[#E2B63F] transition">Services</a>
+        <a href="contact.html" class="text-[#E2B63F] font-medium">Booking</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section
+    class="min-h-[60vh] flex items-center justify-center text-center px-6 pt-32"
+    style="background: linear-gradient(180deg, #FFF7FA 0%, #F9EEF3 100%);"
+  >
+    <div class="max-w-3xl">
+      <h2 class="heading-font text-4xl md:text-5xl text-[#6B2BA6] mb-6">
+        Book Your Divine Experience
+      </h2>
+      <p class="text-lg md:text-xl text-[#3A2A2F]">
+        Tell us about your event and let’s design something unforgettable.
+      </p>
+    </div>
+  </section>
+
+  <!-- FORM SECTION -->
+  <section class="py-20 px-6 bg-[#F9EEF3]">
+    <div class="max-w-xl mx-auto">
+
+      <div class="bg-white rounded-2xl shadow-lg p-10">
+
+        <form id="contactForm" class="space-y-6">
+
+          <input
+            type="text"
+            name="name"
+            placeholder="Your Name"
+            required
+            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#6B2BA6]"
+          >
+
+          <input
+            type="email"
+            name="email"
+            placeholder="Your Email"
+            required
+            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#6B2BA6]"
+          >
+
+          <textarea
+            name="message"
+            placeholder="Tell us about your event"
+            rows="5"
+            required
+            class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#6B2BA6]"
+          ></textarea>
+
+          <button
+            type="submit"
+            class="w-full py-4 bg-[#D61F87] text-white rounded-full shadow-lg hover:bg-[#b8186d] transition text-lg"
+          >
+            Send Inquiry
+          </button>
+
+          <p id="responseMsg" class="text-center text-sm mt-4"></p>
+
+        </form>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="py-10 bg-[#2D0F3B] text-white text-center">
+    <p class="text-xs mt-4 text-gray-400">
+      © 2026 Divine Experience Design & Decor LLC. All rights reserved.
+    </p>
+  </footer>
+
+  <!-- FORM SCRIPT -->
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData(e.target);
+
+      const response = await fetch('http://localhost:3000/send-email', {
+        method: 'POST',
+        body: formData
+      });
+
+      const result = await response.text();
+      document.getElementById('responseMsg').innerText = result;
+    });
+  </script>
+
+</body>
+</html>
